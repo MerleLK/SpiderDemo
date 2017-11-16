@@ -1,7 +1,18 @@
 import mysql.connector as connector
 from SpiderDemo import settings
 
-
+"""
+DROP TABLE IF EXISTS `dd_name`;
+CREATE TABLE `dd_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `xs_name` varchar(255) DEFAULT NULL,
+  `xs_author` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `name_id` varchar(255) DEFAULT NULL,
+  `novel_url` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+"""
 conn = connector.connect(user=settings.MYSQL_USER, password=settings.MYSQL_PASSWORD, host=settings.MYSQL_HOST,
                          database=settings.MYSQL_DB)
 cur = conn.cursor()
