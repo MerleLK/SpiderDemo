@@ -1,4 +1,3 @@
-import re
 import scrapy
 from bs4 import BeautifulSoup
 from scrapy.http import Request
@@ -6,6 +5,9 @@ from SpiderDemo.items import SpiderdemoItem
 
 
 class ExampleSpider(scrapy.Spider):
+    """
+        a simple spider follow by cuiqingcai.com.
+    """
     name = 'example'
     allowed_domains = ['x23us.com']
     start_url = 'http://www.x23us.com/class/'
@@ -31,7 +33,6 @@ class ExampleSpider(scrapy.Spider):
         for td in tds:
             novel_name = td.find_all('a')[1].get_text()
             novel_url = td.find_all('a')[1]['href']
-            print(novel_url)
             author = td.find_all('td', class_='C')[0].get_text()
             yield Request(novel_url, callback=self.get_chapter_url, meta={
                 'name': novel_name, 'url': novel_url, 'category': category, 'author': author})
