@@ -16,3 +16,13 @@ class SpiderdemoItem(scrapy.Item):
     novel_url = scrapy.Field()
     category = scrapy.Field()
     name_id = scrapy.Field()
+
+
+class SportNewsItem(scrapy.Item):
+
+    title = scrapy.Field()
+    created_time = scrapy.Field()
+    source = scrapy.Field()
+    content = scrapy.Field()
+    keywords = scrapy.Field()
+    url = scrapy.Field()
