@@ -30,15 +30,19 @@ class SportNewsSpider(scrapy.Spider):
         main_new = BeautifulSoup(response.text, 'lxml')
         content = ''
         for p in main_new.find('div', class_='article-a__content').find_all('p'):
-            content += p.get_text()
-
-        keywords = ''
+            content += p.get_text().strip()
+        keywords = []
         for k in main_new.find('section', class_='article-a_keywords').find_all('a'):
-            keywords += ' ' + k.get_text()
+            keywords.append(k.get_text())
+        source = []
+        for i in main_new.find('span', class_='article-a__source').get_text().strip().split(" "):
+            source.append(i)
+
         item = SportNewsItem()
         item['title'] = str(main_new.find('title').text)
         item['url'] = response.url
         item['content'] = content
         item['created_time'] = main_new.find('span', class_='article-a__time').get_text()
-        item['source'] = main_new.find('span', class_='article-a__source').get_text()
+        item['source'] = source
+        item['keywords'] = keywords
         return item
